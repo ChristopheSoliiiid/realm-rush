@@ -5,14 +5,18 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int goldReward = 25;
-    [SerializeField] int goldPenalty = 25;
+    [SerializeField] int damageToPlayer = 1;
+    [SerializeField] AudioClip ramAttackSFX;
+    [SerializeField] [Range(0f, 1f)] float volumeSFX = 0.5f;
 
     Bank bank;
+    PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         bank = FindObjectOfType<Bank>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
     }
 
     public void RewardGold()
@@ -22,10 +26,12 @@ public class Enemy : MonoBehaviour
         bank.Deposit(goldReward);
     }
 
-    public void StealGold()
+    public void InflictDamageToPlayer()
     {
-        if (bank == null) { return; }
+        if (playerHealth == null) { return; }
 
-        bank.Withdraw(goldPenalty);
+        playerHealth.increaseHitTaken(damageToPlayer);
+
+        AudioSource.PlayClipAtPoint(ramAttackSFX, Camera.main.transform.position, volumeSFX);
     }
 }

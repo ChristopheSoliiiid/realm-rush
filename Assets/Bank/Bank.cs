@@ -20,12 +20,6 @@ public class Bank : MonoBehaviour
         updateBalanceText();
     }
 
-    void ReloadScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
-    }
-
     void updateBalanceText()
     {
         balanceText.text = currentBalance.ToString();
@@ -43,9 +37,5 @@ public class Bank : MonoBehaviour
         currentBalance -= Mathf.Abs(amount);
 
         updateBalanceText();
-
-        if (currentBalance < 0) {
-            ReloadScene();
-        }
     }
 }
