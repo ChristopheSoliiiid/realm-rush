@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Sprite heartEmptySprite;
     [SerializeField] Vector2 spriteSize;
 
-    public int currentHitTaken = 0;
+    int currentHitTaken = 0;
 
     // Start is called before the first frame update
     void Start()

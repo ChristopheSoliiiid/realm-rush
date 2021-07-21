@@ -9,10 +9,18 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] float range = 15f;
     
     Transform target;
+    BuildBar buildBar;
+
+    void Start()
+    {
+        buildBar = GetComponentInChildren<BuildBar>();    
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (buildBar.IsBuilding == true) { return; }
+
         FindClosestTarget();
 
         if (target != null) {

@@ -10,6 +10,8 @@ public class BuildBar : MonoBehaviour
     float buildDuration = 1f;
     bool isBuilding = true;
 
+    public bool IsBuilding { get { return isBuilding; } }
+
     // Update is called once per frame
     void Update()
     {
