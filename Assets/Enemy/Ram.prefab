@@ -257,6 +257,8 @@ MonoBehaviour:
   healthCanvas: {fileID: 4383781954221439651}
   healthFillBar: {fileID: 6922393447037772111}
   deathSFX: {fileID: 8300000, guid: b773c240891009c44ad428444ac736c5, type: 3}
+  deathVFX: {fileID: 1319168964082722953, guid: c6bf8a30c64a5a34cbce27bacbec2e89, type: 3}
+  destroyVFXAfterSeconds: 0.5
 --- !u!114 &1204723125010266966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +274,7 @@ MonoBehaviour:
   goldReward: 25
   damageToPlayer: 1
   ramAttackSFX: {fileID: 8300000, guid: adfd1de31f426fc4d939752606aecf3b, type: 3}
-  volumeSFX: 0.2
+  volumeSFX: 0.1
 --- !u!65 &5180852586138532535
 BoxCollider:
   m_ObjectHideFlags: 0

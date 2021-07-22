@@ -29,12 +29,12 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    void PlayingStatus()
+    void GamePlaying()
     {
         isPlaying = true;
     }
 
-    void LostStatus()
+    void GamePaused()
     {
         isPlaying = false;
     }
@@ -51,7 +51,7 @@ public class LevelLoader : MonoBehaviour
 
     public void ReloadLevel()
     {
-        PlayingStatus();
+        GamePlaying();
 
         SceneManager.LoadScene(currentSceneIndex);
     }
@@ -68,7 +68,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadGameOver()
     {
-        LostStatus();
+        GamePaused();
 
         if (LostInterface != null) {
             LostInterface.SetActive(true);
@@ -86,7 +86,7 @@ public class LevelLoader : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(timeToWait);
 
-        PlayingStatus();
+        GamePlaying();
 
         methodToCall();
     }

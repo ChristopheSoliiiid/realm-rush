@@ -11,6 +11,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Canvas healthCanvas;
     [SerializeField] Image healthFillBar;
     [SerializeField] AudioClip deathSFX;
+    [SerializeField] ParticleSystem deathVFX;
+    [SerializeField] float destroyVFXAfterSeconds = 0.5f;
 
     int currentHitPoints = 0;
     Enemy enemy;
@@ -56,10 +58,14 @@ public class EnemyHealth : MonoBehaviour
     void Death()
     {
         gameObject.SetActive(false);
+
         AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+
+        var deathParticleSystem = Instantiate(deathVFX, (transform.position + new Vector3(0, 3, 0)), Quaternion.identity);
+        Destroy(deathParticleSystem, destroyVFXAfterSeconds);
 
         maxHitPoints += difficultyRamp;
 
-        enemy.RewardGold();
+        enemy.Rewards();
     }
 }

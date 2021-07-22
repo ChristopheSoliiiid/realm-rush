@@ -46,7 +46,7 @@ public class SoundButtonHandler : MonoBehaviour
         if (audioSource != null) {
             audioSource.volume = isSoundOn ? previousVolume : 0f;
         } else {
-            Camera.main.GetComponent<AudioListener>().enabled = isSoundOn;
+            AudioListener.volume = isSoundOn ? 1f : 0f;
         }
     }
 }
