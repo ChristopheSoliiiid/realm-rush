@@ -5,16 +5,38 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] int timeToWait = 3;
+    [SerializeField] GameObject retryButton;
 
     int currentSceneIndex;
+    bool isPlaying = true;
+    public bool IsPlaying { get { return isPlaying; } }
 
-    public void Start()
+    delegate void DelegateMethod();
+
+    void Awake()
+    {
+        if (retryButton != null) {
+            retryButton.SetActive(false);
+        }
+    }
+
+    void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         if (currentSceneIndex == 0) {
-            StartCoroutine(WaitForTime());
+            StartCoroutine(WaitForTime(LoadNextScene));
         }
+    }
+
+    void PlayingStatus()
+    {
+        isPlaying = true;
+    }
+
+    void LostStatus()
+    {
+        isPlaying = false;
     }
 
     public void LoadFirstLevel()
@@ -29,6 +51,8 @@ public class LevelLoader : MonoBehaviour
 
     public void ReloadLevel()
     {
+        PlayingStatus();
+
         SceneManager.LoadScene(currentSceneIndex);
     }
 
@@ -44,7 +68,13 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadGameOver()
     {
-        SceneManager.LoadScene("Game Over");
+        LostStatus();
+
+        if (retryButton != null) {
+            retryButton.SetActive(true);
+        } else {
+            StartCoroutine(WaitForTime(ReloadLevel));
+        }       
     }
 
     public void QuitGame()
@@ -52,10 +82,12 @@ public class LevelLoader : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator WaitForTime()
+    private IEnumerator WaitForTime(DelegateMethod methodToCall)
     {
-        yield return new WaitForSeconds(timeToWait);
+        yield return new WaitForSecondsRealtime(timeToWait);
 
-        LoadNextScene();
+        PlayingStatus();
+
+        methodToCall();
     }
 }

@@ -11,12 +11,14 @@ public class EnemyMover : MonoBehaviour
     Enemy enemy;
     GridManager gridManager;
     Pathfinder pathfinder;
+    LevelLoader levelLoader;
 
     void Awake()
     {
         enemy = GetComponent<Enemy>();
         gridManager = FindObjectOfType<GridManager>();
         pathfinder = FindObjectOfType<Pathfinder>();
+        levelLoader = FindObjectOfType<LevelLoader>();
     }
 
     void OnEnable()
@@ -50,6 +52,8 @@ public class EnemyMover : MonoBehaviour
 
     void FinishPath()
     {
+        if (!levelLoader.IsPlaying) { return; }
+
         gameObject.SetActive(false);
         enemy.InflictDamageToPlayer();
     }
@@ -63,7 +67,7 @@ public class EnemyMover : MonoBehaviour
 
             transform.LookAt(endPosition);
 
-            while (travelPercent < 1f) {
+            while (travelPercent < 1f && levelLoader.IsPlaying) {
                 travelPercent += Time.deltaTime * speed;
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame();

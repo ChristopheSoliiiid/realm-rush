@@ -8,8 +8,9 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHitPoints = 5;
     [SerializeField] [Tooltip("Adds amounts to maxHitPoints when enemy dies.")] int difficultyRamp = 1;
-    [SerializeField] Image healthBar;
+    [SerializeField] Canvas healthCanvas;
     [SerializeField] Image healthFillBar;
+    [SerializeField] AudioClip deathSFX;
 
     int currentHitPoints = 0;
     Enemy enemy;
@@ -26,6 +27,11 @@ public class EnemyHealth : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
+    void Update()
+    {
+        healthCanvas.transform.LookAt(transform.position + Camera.main.transform.rotation * -Vector3.back, Camera.main.transform.rotation * -Vector3.down);
+    }
+
     void OnParticleCollision(GameObject other)
     {
         ProcessHit();
@@ -38,14 +44,22 @@ public class EnemyHealth : MonoBehaviour
         UpdateHealthBar();
 
         if (currentHitPoints >= maxHitPoints) {
-            gameObject.SetActive(false);
-            maxHitPoints += difficultyRamp;
-            enemy.RewardGold();
+            Death();
         }
     }
 
     void UpdateHealthBar()
     {
         healthFillBar.fillAmount = (float) (maxHitPoints - currentHitPoints) / maxHitPoints;
+    }
+
+    void Death()
+    {
+        gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+
+        maxHitPoints += difficultyRamp;
+
+        enemy.RewardGold();
     }
 }

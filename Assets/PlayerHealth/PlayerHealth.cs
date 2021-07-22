@@ -12,10 +12,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Vector2 spriteSize;
 
     int currentHitTaken = 0;
+    LevelLoader levelLoader;
 
     // Start is called before the first frame update
     void Start()
     {
+        levelLoader = FindObjectOfType<LevelLoader>();
+
         for (int i = 0; i < maxHealthPoint; i++) {
             CreateHealthUI(i);
         }
@@ -41,15 +44,11 @@ public class PlayerHealth : MonoBehaviour
     {
         Image[] images = gameObject.GetComponentsInChildren<Image>();
 
+        Debug.Log(currentHitTaken);
+
         for (int i = 0; i < currentHitTaken; i++) {
             images[maxHealthPoint - currentHitTaken].sprite = heartEmptySprite;
         }
-    }
-
-    void ReloadScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
     }
 
     public void increaseHitTaken(int value)
@@ -59,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealth();
 
         if (currentHitTaken >= maxHealthPoint) {
-            ReloadScene();
+            levelLoader.LoadGameOver();
         }
     }
 }

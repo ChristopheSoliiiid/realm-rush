@@ -7,24 +7,34 @@ public class TargetLocator : MonoBehaviour
     [SerializeField] Transform weapon;
     [SerializeField] ParticleSystem projectileParticules;
     [SerializeField] float range = 15f;
+    [SerializeField] float weaponRotationSpeed = 10f;
     
     Transform target;
     BuildBar buildBar;
+    LevelLoader levelLoader;
 
     void Start()
     {
-        buildBar = GetComponentInChildren<BuildBar>();    
+        buildBar = GetComponentInChildren<BuildBar>();
+        levelLoader = FindObjectOfType<LevelLoader>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (buildBar.IsBuilding == true) { return; }
+        if (levelLoader.IsPlaying) {
+            if (buildBar.IsBuilding == true) {
+                Attack(false);
+                return;
+            }
 
-        FindClosestTarget();
+            FindClosestTarget();
 
-        if (target != null) {
-            AimWeapon();
+            if (target != null) {
+                AimWeapon();
+            } else {
+                Attack(false);
+            }
         } else {
             Attack(false);
         }
@@ -54,7 +64,11 @@ public class TargetLocator : MonoBehaviour
 
         Attack(targetDistance < range);
 
-        weapon.LookAt(target);
+        weapon.rotation = Quaternion.Slerp(
+            weapon.rotation,
+            Quaternion.LookRotation(target.position - weapon.position),
+            weaponRotationSpeed * Time.deltaTime
+        );
     }
 
     void Attack(bool isActive)
