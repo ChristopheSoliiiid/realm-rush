@@ -44,8 +44,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Image[] images = gameObject.GetComponentsInChildren<Image>();
 
-        Debug.Log(currentHitTaken);
-
         for (int i = 0; i < currentHitTaken; i++) {
             images[maxHealthPoint - currentHitTaken].sprite = heartEmptySprite;
         }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] int timeToWait = 3;
-    [SerializeField] GameObject retryButton;
+    [SerializeField] GameObject LostInterface;
 
     int currentSceneIndex;
     bool isPlaying = true;
@@ -15,8 +15,8 @@ public class LevelLoader : MonoBehaviour
 
     void Awake()
     {
-        if (retryButton != null) {
-            retryButton.SetActive(false);
+        if (LostInterface != null) {
+            LostInterface.SetActive(false);
         }
     }
 
@@ -70,8 +70,8 @@ public class LevelLoader : MonoBehaviour
     {
         LostStatus();
 
-        if (retryButton != null) {
-            retryButton.SetActive(true);
+        if (LostInterface != null) {
+            LostInterface.SetActive(true);
         } else {
             StartCoroutine(WaitForTime(ReloadLevel));
         }       
