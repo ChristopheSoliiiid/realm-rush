@@ -10,6 +10,8 @@ public class Tower : MonoBehaviour
 
     BuildBar progressBar;
 
+    public int Cost { get { return cost; } }
+
     void Awake()
     {
         progressBar = GetComponentInChildren<BuildBar>();
@@ -55,9 +57,10 @@ public class Tower : MonoBehaviour
     public bool CreateTower(Tower tower, Vector3 position)
     {
         Bank bank = FindObjectOfType<Bank>();
+        GameObject parentContainer = GameObject.FindGameObjectWithTag("Player");
 
         if (bank != null && bank.CurrentBalance >= cost) {
-            Instantiate(tower.gameObject, position, Quaternion.identity);
+            GameObject instantiatedTower = Instantiate(tower.gameObject, position, Quaternion.identity, parentContainer.transform);
 
             bank.Withdraw(cost);
 

@@ -253,7 +253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 5
-  difficultyRamp: 2
+  difficultyRamp: 1
+  increaseSpeed: 0.05
   healthCanvas: {fileID: 4383781954221439651}
   healthFillBar: {fileID: 6922393447037772111}
   deathSFX: {fileID: 8300000, guid: b773c240891009c44ad428444ac736c5, type: 3}
@@ -272,9 +273,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldReward: 25
+  scoreValue: 25
   damageToPlayer: 1
   ramAttackSFX: {fileID: 8300000, guid: adfd1de31f426fc4d939752606aecf3b, type: 3}
-  volumeSFX: 0.1
+  volumeSFX: 0.05
 --- !u!65 &5180852586138532535
 BoxCollider:
   m_ObjectHideFlags: 0

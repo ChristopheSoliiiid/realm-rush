@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class SoundButtonHandler : MonoBehaviour
 {
     [SerializeField] Sprite soundOnSprite;
     [SerializeField] Sprite soundOffSprite;
-    [SerializeField] GameObject soundToToggle;
+    [SerializeField] string tagOfTheObjectToMute;
     [SerializeField] float defaultVolume = 0.5f;
 
     Image image;
@@ -21,15 +22,28 @@ public class SoundButtonHandler : MonoBehaviour
         image = GetComponent<Image>();
         image.sprite = soundOnSprite;
 
-        audioSource = soundToToggle != null ? soundToToggle.GetComponent<AudioSource>() : null;
+        GetAudioSourceFromGameObject();
         previousVolume = audioSource != null ? audioSource.volume : defaultVolume;
 
         button = GetComponent<Button>();
         button.onClick.AddListener(ToggleSoundAndSprite);
     }
 
+    void GetAudioSourceFromGameObject()
+    {
+        if (!String.IsNullOrEmpty(tagOfTheObjectToMute)) {
+            GameObject gameObjectFoundByTag = GameObject.Find(tagOfTheObjectToMute);
+
+            if (gameObjectFoundByTag != null) {
+                audioSource = gameObjectFoundByTag.GetComponent<AudioSource>();
+            }
+        }
+    }
+
     void ToggleSoundAndSprite()
     {
+        GetAudioSourceFromGameObject();
+
         isSoundOn = !isSoundOn;
 
         ToggleSprite();

@@ -76,4 +76,9 @@ public class EnemyMover : MonoBehaviour
 
         FinishPath();
     }
+
+    public void IncreaseSpeed(float amount)
+    {
+        speed += Mathf.Abs(amount);
+    }
 }

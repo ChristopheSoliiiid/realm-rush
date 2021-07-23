@@ -6,6 +6,7 @@ using TMPro;
 public class Score : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreEndScreenText;
 
     int score = 0;
 
@@ -17,6 +18,7 @@ public class Score : MonoBehaviour
     void UpdateScoreText()
     {
         scoreText.text = score.ToString();
+        scoreEndScreenText.text = $"Your score is : {score}";
     }
 
     public void IncreaseScore(int amount)

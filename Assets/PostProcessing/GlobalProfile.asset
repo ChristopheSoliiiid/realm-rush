@@ -120,7 +120,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: -0.5
+    value: -0.7
   contrast:
     overrideState: 1
     value: 4
@@ -1451,7 +1451,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 2.49
+    value: 3
   anamorphicRatio:
     overrideState: 0
     value: -0.23

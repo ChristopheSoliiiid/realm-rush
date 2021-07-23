@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHitPoints = 5;
-    [SerializeField] [Tooltip("Adds amounts to maxHitPoints when enemy dies.")] int difficultyRamp = 1;
+    [SerializeField] [Tooltip("Adds amounts to maxHitPoints when enemy dies.")] int difficultyRamp = 2;
+    [SerializeField] [Tooltip("Adds amounts to the speed when enemy dies.")] float increaseSpeed = 0.1f;
     [SerializeField] Canvas healthCanvas;
     [SerializeField] Image healthFillBar;
     [SerializeField] AudioClip deathSFX;
@@ -16,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
 
     int currentHitPoints = 0;
     Enemy enemy;
+    EnemyMover enemyMover;
 
     void OnEnable()
     {
@@ -27,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         enemy = GetComponent<Enemy>();
+        enemyMover = GetComponent<EnemyMover>();
     }
 
     void Update()
@@ -59,12 +62,13 @@ public class EnemyHealth : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+        AudioSource.PlayClipAtPoint(deathSFX, transform.position, 1f);
 
         var deathParticleSystem = Instantiate(deathVFX, (transform.position + new Vector3(0, 3, 0)), Quaternion.identity);
-        Destroy(deathParticleSystem, destroyVFXAfterSeconds);
+        Destroy(deathParticleSystem.gameObject, destroyVFXAfterSeconds);
 
         maxHitPoints += difficultyRamp;
+        enemyMover.IncreaseSpeed(increaseSpeed);
 
         enemy.Rewards();
     }
