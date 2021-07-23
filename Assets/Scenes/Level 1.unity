@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4497103, g: 0.49977773, b: 0.5756348, a: 1}
+  m_IndirectSpecularColor: {r: 0.44943875, g: 0.49951255, b: 0.5756918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -515,7 +515,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -0.032884657, z: 4.5905e-41, w: 7.949655e-11}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -527,13 +527,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.32227263, y: -0.31468052, z: 0.11453431, w: 0.8854369}
+  m_LocalRotation: {x: 0.3299872, y: -0.31366906, z: 0.11727604, w: 0.8825909}
   m_LocalPosition: {x: 40, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 117137313}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: -39.13, z: 0}
+  m_LocalEulerAnglesHint: {x: 41, y: -39.13, z: 0}
 --- !u!114 &707706574 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1123088278810488655, guid: 527d4362715c8e84e8e1e538a12937df, type: 3}

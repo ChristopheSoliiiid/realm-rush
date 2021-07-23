@@ -48,7 +48,7 @@ public class Pathfinder : MonoBehaviour
             if (grid.ContainsKey(neighborCoordinates)) {
                 neighbors.Add(grid[neighborCoordinates]);
 
-                // grid[neighborCoordinates].isExplored = true;
+                grid[neighborCoordinates].isExplored = true;
             }
         }
 
